@@ -338,6 +338,9 @@ class Model_Product extends Model_Abstract {
         if (isset($param['is_hot']) && $param['is_hot'] != '') {
             $query->where(self::$_table_name.'.is_hot', $param['is_hot']);
         }
+        if (isset($param['is_discount']) && $param['is_discount'] != '') {
+            $query->where(self::$_table_name.'.discount_price', '>', 0);
+        }
         if (isset($param['is_home_slide']) && $param['is_home_slide'] != '') {
             $query->where(self::$_table_name.'.is_home_slide', $param['is_home_slide']);
         }

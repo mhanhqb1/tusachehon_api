@@ -91,39 +91,23 @@ class Model_Setting extends Model_Abstract {
             'page' => 1,
             'limit' => 12
         ));
-        // Get posts data
-        $result['cate_products'] = DB::select(
-                'products.*',
-                array('cates.name', 'cate_name'),
-                array('cates.url', 'cate_url')
-            )
-            ->from(DB::expr("
-                (
-                    SELECT
-			products.*,
-			@rn :=
-                            IF (@prev = cate_id, @rn + 1, 1) AS rn,
-                        @prev := cate_id
-                    FROM
-                        products
-                    JOIN (SELECT @prev := NULL, @rn := 0) AS vars
-                    WHERE
-                        disable = 0
-                    ORDER BY
-                        cate_id
-                ) AS products
-            "))
-            ->join('cates', 'LEFT')
-            ->on('cates.id', '=', 'products.cate_id')
-            ->where(DB::expr("rn <= 10"))
-            ->execute()
-            ->as_array()
-        ;
+        // Get discount product
+        $result['discount_products'] = Model_Product::get_all(array(
+            'is_discount' => 1,
+            'page' => 1,
+            'limit' => 12,
+            'sort' => 'discount_price-desc'
+        ));
+         // Get new product
+        $result['new_products'] = Model_Product::get_all(array(
+            'page' => 1,
+            'limit' => 12
+        ));
         
         // Get news
         $result['posts'] = Model_Post::get_all(array(
             'page' => 1,
-            'limit' => 12
+            'limit' => 6
         ));
                 
         // Return
