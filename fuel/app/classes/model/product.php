@@ -167,7 +167,7 @@ class Model_Product extends Model_Abstract {
             }
             $query->where(self::$_table_name.'.cate_id', 'IN', $param['cate_id']);
         }
-        if (!empty($param['is_sale_off'])) {
+        if (!empty($param['is_discount'])) {
             $query->where(self::$_table_name.'.discount_price', '>', 0);
         }
         
@@ -211,11 +211,20 @@ class Model_Product extends Model_Abstract {
                 'is_discount' => 1
             ));
         }
+        $newProducts = array();
+        if (!empty($param['get_new_products'])) {
+            $newProducts = self::get_all(array(
+                'sort' => 'id-desc',
+                'page' => 1,
+                'limit' => 6
+            ));
+        }
         
         return array(
             'total' => $total,
             'data' => $data,
-            'discount_products' => $discountProducts
+            'discount_products' => $discountProducts,
+            'new_products' => $newProducts
         );
     }
     
