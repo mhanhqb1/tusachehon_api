@@ -189,11 +189,21 @@ class Model_Post extends Model_Abstract {
                 'page' => 1
             ));
         }
+        $discountProducts = array();
+        if (!empty($param['get_discount_products'])) {
+            $discountProducts = Model_Product::get_all(array(
+                'is_discount' => 1,
+                'page' => 1,
+                'limit' => 6,
+                'sort' => 'discount_price-desc'
+            ));
+        }
         
         return array(
             'total' => $total,
             'data' => $data,
-            'new_posts' => $newPosts
+            'new_posts' => $newPosts,
+            'discount_products' => $discountProducts
         );
     }
     
