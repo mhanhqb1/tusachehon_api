@@ -247,6 +247,21 @@ class Model_Product extends Model_Abstract {
                 'limit' => 6
             ));
         }
+        if (!empty($param['get_discount_products'])) {
+            $data['discount_products'] = self::get_all(array(
+                'sort' => 'discount_price-desc',
+                'page' => 1,
+                'limit' => 6,
+                'is_discount' => 1
+            ));
+        }
+        if (!empty($param['get_related_products'])) {
+            $data['related_products'] = self::get_all(array(
+                'sort' => 'id-desc',
+                'page' => 1,
+                'limit' => 12
+            ));
+        }
         
         return $data;
     }
