@@ -202,9 +202,20 @@ class Model_Product extends Model_Abstract {
         $data = $query->execute()->as_array();
         $total = !empty($data) ? DB::count_last_query(self::$slave_db) : 0;
         
+        $discountProducts = array();
+        if (!empty($param['get_discount_products'])) {
+            $discountProducts = self::get_all(array(
+                'sort' => 'discount_price-desc',
+                'page' => 1,
+                'limit' => 6,
+                'is_discount' => 1
+            ));
+        }
+        
         return array(
             'total' => $total,
-            'data' => $data
+            'data' => $data,
+            'discount_products' => $discountProducts
         );
     }
     
