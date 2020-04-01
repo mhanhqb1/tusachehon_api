@@ -85,6 +85,9 @@ class Model_Product extends Model_Abstract {
                 return false;
             }
             $param['image'] = !empty($uploadResult['body']['image']) ? $uploadResult['body']['image'] : '';
+            $param['image2'] = !empty($uploadResult['body']['image2']) ? $uploadResult['body']['image2'] : '';
+            $param['image3'] = !empty($uploadResult['body']['image3']) ? $uploadResult['body']['image3'] : '';
+            $param['image4'] = !empty($uploadResult['body']['image4']) ? $uploadResult['body']['image4'] : '';
         }
         
         // Set data
@@ -109,6 +112,15 @@ class Model_Product extends Model_Abstract {
         }
         if (!empty($param['image'])) {
             $self->set('image', $param['image']);
+        }
+        if (!empty($param['image2'])) {
+            $self->set('image2', $param['image2']);
+        }
+        if (!empty($param['image3'])) {
+            $self->set('image3', $param['image3']);
+        }
+        if (!empty($param['image4'])) {
+            $self->set('image4', $param['image4']);
         }
         if (!empty($param['seo_keyword'])) {
             $self->set('seo_keyword', $param['seo_keyword']);
