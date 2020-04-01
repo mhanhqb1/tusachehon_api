@@ -31,7 +31,10 @@ class Model_Product extends Model_Abstract {
         'created',
         'updated',
         'disable',
-        'is_hot'
+        'is_hot',
+        'image2',
+        'image3',
+        'image4'
     );
 
     protected static $_observers = array(

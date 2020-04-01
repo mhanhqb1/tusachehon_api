@@ -6,8 +6,8 @@
 return array(
 	'default' => array(
 		'connection'  => array(
-			'dsn'        => 'mysql:host=localhost;dbname=lyonabea_lyona',
-			'username'   => 'lyonabea_lyona',
+			'dsn'        => 'mysql:host=localhost;dbname=lyonabea_ehon',
+			'username'   => 'lyonabea_ehon',
 			'password'   => '1@Hoanganh',
 		),
 	),
